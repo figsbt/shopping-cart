@@ -27,9 +27,9 @@
 * Set ENV variable    : `export POSTGRES_HOST=localhost POSTGRES_PORT=5432 POSTGRES_DB=postgres POSTGRES_USER=postgres POSTGRES_PASSWORD=sc1er SECRET_KEY=asjdhasjd`
 * Start App           : `uvicorn main_app:app --reload`
 
-**NOTE** Will be contanarizing the app and add it as a service within docker-compose to start the whole setup with just `docker compose up -d`
+---
 
-
+> **NOTE** Will be contanarizing the app and add it as a service within docker-compose to start the whole setup with just `docker compose up -d`
 Testing APIs both via swagger and curl right now:
 * we can navigate to swagger at `http://127.0.0.1:8000/docs`
     - ![swagger image](https://github.com/figsbt/shopping-cart/blob/master/src/swagger.png?raw=true)
