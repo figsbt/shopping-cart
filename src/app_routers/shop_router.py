@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, Body, HTTPException, status, Request
 from models_schemas.shop_ms import Item, ItemSchema, ItemCreateSchema
 from rdb_store.dbops import get_db, Session
 from rdb_store.shop import create_item, list_items
-from app_routers.enforce_roles import is_admin
+from app_routers.enforce_roles import check_permissions
 
 
 router = APIRouter()
@@ -15,7 +15,7 @@ def add_item(
 	payload: ItemCreateSchema = Body(), 
 	session: Session=Depends(get_db)
 ):
-	_admin = is_admin(req=req, session=session)
+	_admin = check_permissions(req=req, session=session)
 	if _admin:
 		return create_item(session, item=payload)
 	else:
@@ -24,6 +24,8 @@ def add_item(
 
 @router.get("/item_list", response_model=List)
 def item_list(
+	req: Request,
 	session: Session=Depends(get_db)
 ):
-    return list_items(session=session)
+	check_permissions(req=req, session=session, admin_check=False)
+	return list_items(session=session)

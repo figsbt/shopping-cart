@@ -7,7 +7,7 @@ from models_schemas.users_ms import User
 
 
 
-def is_admin(req: Request, session: Session):
+def check_permissions(req: Request, session: Session, admin_check: bool = True):
 	try:
 		authorization = req.headers["Authorization"]
 	except:
@@ -19,6 +19,6 @@ def is_admin(req: Request, session: Session):
 	if not isinstance(_d, dict) or not _d.get("email"):
 		raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Bad token!")
 	user:User = get_user(session=session, email=_d.get("email"))
-	if not user.is_admin:
+	if (admin_check) and (not user.is_admin):
 		raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not admin!")
 	return True
