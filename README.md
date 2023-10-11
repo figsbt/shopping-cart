@@ -32,11 +32,11 @@
 > **NOTE** Will be contanarizing the app and add it as a service within docker-compose to start the whole setup with just `docker compose up -d`
 Testing APIs both via swagger and curl right now:
 * we can navigate to swagger at `http://127.0.0.1:8000/docs`
-    - ![swagger image](https://github.com/figsbt/shopping-cart/blob/master/src/swagger.png?raw=true)
-    - Swagger doesn't to test APIs requirent Authorization token via header so testing via curl
-        - Sample requests
-        - Sample | 
-    - Will be creating a postman collection and sharing
+    ![Alt text](swagger.png)
+* Swagger doesn't to test APIs requirent Authorization token via header so testing via curl
+    - Sample requests
+    - Sample | 
+* Will be creating a postman collection and sharing
 
 
 ##  What's completed
