@@ -6,10 +6,9 @@
 > Choice of API framework: FastAPI as its a high-performance web framework for building APIs with Python and its on par with NodeJS and Go for high performance compared to other python web frameworks.
 
 ## Quick explanation of design - will elaborate
-    - FastAPI web app to serve user, item and cart APIs making up the shopping cart app
-    - Choice of RDBMS: PostgresSQL with tables - users, items and carts
-    - The web ap with be containarized along with Postgres image and run via docker-compose
-        - The setup is of single node right now, will elaborate on how to scale the above setup for performance and scale in a section below later
+* FastAPI web app to serve user, item and cart APIs making up the shopping cart app
+* Choice of RDBMS: PostgresSQL with tables - users, items and carts
+* The web ap with be containarized along with Postgres image and run via docker-compose. The setup is of single node right now, will elaborate on how to scale the above setup for performance and scale in a section below later
 
 ## Current Local setup as I build this and continue testing
     - Code path           : `./src`
