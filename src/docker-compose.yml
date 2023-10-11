@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+
+  postgresdb:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=sc1er
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    
+volumes:
+  postgres_data:
