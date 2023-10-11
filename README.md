@@ -34,8 +34,18 @@ Testing APIs both via swagger and curl right now:
 * we can navigate to swagger at `http://127.0.0.1:8000/docs`
     ![Swagger Image](swagger.png)
 * Swagger doesn't to test APIs requirent Authorization token via header so testing via curl
-    - Sample requests
-    - Sample | 
+    - Sample API           | `curl -X 'GET' 'http://127.0.0.1:8000/application-info' -H 'accept: application/json'`
+
+    - Users Create Account | `curl -X 'POST'  'http://127.0.0.1:8000/users/create_account' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"email_id": "user2@example.com", "name": "user2 name", "password": "sdfhsdfs", "is_admin": false}'`
+    - Users Login API      | `curl -X 'POST' 'http://127.0.0.1:8000/users/login' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{ "email": "user2@example.com", "password": "sdfhsdfs" }'`
+        - Response: `{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIyQGV4YW1wbGUuY29tIn0.e-nKJxWTjnjgEoMd8lT31jgga40mtaBqmV7WeouyS8o"}`
+    - Users Suspend API    | `curl --location 'http://127.0.0.1:8000/users/suspend_user' --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIn0.N3LMRxhKqsR4SfttRFnHoTZjGXGDUKbtD8kTKKAQp9s' --header 'Content-Type: application/json' --data-raw '{ "suspend_email": "user2@example.com" }'`
+        - Response: Returns appropriate error if invalid token or not-admin. If admin suspends user - `is_active: true`
+    
+    - Items AddItem API    | `curl --location 'http://127.0.0.1:8000/shop/add_item' --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIn0.N3LMRxhKqsR4SfttRFnHoTZjGXGDUKbtD8kTKKAQp9s' --header 'Content-Type: application/json' --data '{ "item_name": "bottle", "item_details": "A green bottle", "stock": 3, "cost": 12.56 }'`
+        - Response: Only admin can add items
+    - Items ListItems API  | `curl --location 'http://127.0.0.1:8000/shop/item_list' --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIn0.8d5Xn3qxJEahbkZCnV4Ww0IWe5bLAUkKWCYDkigD0ao'`
+        - Response: List of items for any user who is active
 * Will be creating a postman collection and sharing
 ---
 
@@ -78,4 +88,5 @@ Testing APIs both via swagger and curl right now:
 * Cart APIs for both adding items(if stock) and removing them from cart
 * Containarizing the entire setup via docker-compose
 * Adding tests
-* Pending documentation: HowTo of everything including how to scale this application
+* If possible, CICD via github actions
+* Pending documentation: HowTo of everything including how to secure and scale this application

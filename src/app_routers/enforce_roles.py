@@ -19,6 +19,8 @@ def check_permissions(req: Request, session: Session, admin_check: bool = True):
 	if not isinstance(_d, dict) or not _d.get("email"):
 		raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Bad token!")
 	user:User = get_user(session=session, email=_d.get("email"))
+	if not user.is_active:
+		raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not active!")
 	if (admin_check) and (not user.is_admin):
 		raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not admin!")
 	return True
