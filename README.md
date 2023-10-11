@@ -1,8 +1,8 @@
 # Shopping Cart 
 
 ## Choices - Python and FastAPI. And Why?
-    Choice of programming Language: Python (Comfortble using python to build apps)
-    Choice of API framework: FastAPI as its a high-performance web framework for building APIs with Python and its on par with NodeJS and Go for high performance compared to other python web frameworks.
+Choice of programming Language: Python (Comfortble using python to build apps)
+Choice of API framework: FastAPI as its a high-performance web framework for building APIs with Python and its on par with NodeJS and Go for high performance compared to other python web frameworks.
 
 ## Quick explanation of design - will elaborate
     - FastAPI web app to serve user, item and cart APIs making up the shopping cart app
