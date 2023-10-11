@@ -78,4 +78,4 @@ Testing APIs both via swagger and curl right now:
 * Cart APIs for both adding items(if stock) and removing them from cart
 * Containarizing the entire setup via docker-compose
 * Adding tests
-* Pending documentation: HowTo of everything
+* Pending documentation: HowTo of everything including how to scale this application
