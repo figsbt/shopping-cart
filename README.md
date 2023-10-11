@@ -32,12 +32,12 @@
 > **NOTE** Will be contanarizing the app and add it as a service within docker-compose to start the whole setup with just `docker compose up -d`
 Testing APIs both via swagger and curl right now:
 * we can navigate to swagger at `http://127.0.0.1:8000/docs`
-    ![Alt text](swagger.png)
+    ![Swagger Image](swagger.png)
 * Swagger doesn't to test APIs requirent Authorization token via header so testing via curl
     - Sample requests
     - Sample | 
 * Will be creating a postman collection and sharing
-
+---
 
 ##  What's completed
 - Web app with API support for all usermanagement which includes 
