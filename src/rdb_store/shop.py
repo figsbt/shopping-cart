@@ -56,7 +56,6 @@ def modify_cart(session:Session, user_id: int, item_id: int, add_or_remove: str)
 		else:
 			items_dict[str_item_id] = item_stock
 		new_stock = stock + 1
-	print(items_dict, new_stock)
 	session.query(Cart).filter(Cart.user_ref == user_id).update({'items_ref': items_dict})
 	session.query(Item).filter(Item.id == item_id).update({'stock': new_stock})
 	session.commit()

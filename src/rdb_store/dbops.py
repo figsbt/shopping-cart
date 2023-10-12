@@ -7,7 +7,7 @@ from sqlalchemy import (
     String, 
     Integer, 
     text, 
-    TIMESTAMP, 
+    TIMESTAMP,
     Float,
     Boolean,
     LargeBinary,
@@ -30,8 +30,7 @@ def get_db():
 	try:
 		yield db
 	finally:
-		db.close()
-		
+		db.close()		
 
 
 def reset_db_on_startup(table_names):

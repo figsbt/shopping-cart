@@ -7,9 +7,26 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_PASSWORD=sc1er
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    
+  
+  fastapi-app:
+    build: .
+    command: bash -c 'uvicorn main_app:app --host 0.0.0.0'
+    volumes:
+      - .:/src
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_HOST=$POSTGRES_HOST
+      - POSTGRES_PORT=$POSTGRES_PORT
+      - POSTGRES_DB=$POSTGRES_DB
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - SECRET_KEY=$SECRET_KEY
+    depends_on:
+      - postgresdb
+
 volumes:
   postgres_data:

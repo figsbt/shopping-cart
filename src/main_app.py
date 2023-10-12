@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from rdb_store.dbops import reset_db_on_startup
-from settings import TABLES
 from app_routers import user_router, shop_router
 
 
@@ -9,8 +8,7 @@ app = FastAPI()
 
 @app.on_event("startup")
 async def startup_event():
-    reset_db_on_startup(TABLES)
-
+    pass
 
 @app.get("/application-info")
 async def application_intro():
