@@ -28,13 +28,16 @@ Testing APIs both via swagger and curl right now
     1. Sample API           | `curl -X 'GET' 'http://127.0.0.1:8000/application-info' -H 'accept: application/json'`
 
     2. Users Create Account | `curl -X 'POST'  'http://127.0.0.1:8000/users/create_account' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"email_id": "user2@example.com", "name": "user2 name", "password": "sdfhsdfs", "is_admin": false}'`
+
     3. Users Login API      | `curl -X 'POST' 'http://127.0.0.1:8000/users/login' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{ "email": "user2@example.com", "password": "sdfhsdfs" }'`
         - Response: `{"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIyQGV4YW1wbGUuY29tIn0.e-nKJxWTjnjgEoMd8lT31jgga40mtaBqmV7WeouyS8o"}`
+
     4. Users Suspend API    | `curl --location 'http://127.0.0.1:8000/users/suspend_user' --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIn0.N3LMRxhKqsR4SfttRFnHoTZjGXGDUKbtD8kTKKAQp9s' --header 'Content-Type: application/json' --data-raw '{ "suspend_email": "user2@example.com" }'`
         - Response: Returns appropriate error if invalid token or not-admin. If admin suspends user - `is_active: true`
     
     5. Items AddItem API    | `curl --location 'http://127.0.0.1:8000/shop/add_item' --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIn0.N3LMRxhKqsR4SfttRFnHoTZjGXGDUKbtD8kTKKAQp9s' --header 'Content-Type: application/json' --data '{ "item_name": "bottle", "item_details": "A green bottle", "stock": 3, "cost": 12.56 }'`
         - Response: Only admin can add items
+        
     6 Items ListItems API  | `curl --location 'http://127.0.0.1:8000/shop/item_list' --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIn0.8d5Xn3qxJEahbkZCnV4Ww0IWe5bLAUkKWCYDkigD0ao'`
         - Response: List of items for any user who is active
 ```
