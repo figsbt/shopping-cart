@@ -1,5 +1,5 @@
+import os
 from fastapi import FastAPI
-from rdb_store.dbops import reset_db_on_startup
 from app_routers import user_router, shop_router
 
 
@@ -8,12 +8,13 @@ app = FastAPI()
 
 @app.on_event("startup")
 async def startup_event():
-    reset_db_on_startup()
+    pass
 
-@app.get("/application-info")
+@app.get("/initialize-tables")
 async def application_intro():
+    os.system(f"PGPASSWORD={os.getenv('POSTGRES_PASSWORD')} psql -h {os.getenv('POSTGRES_HOST')} -U postgres -q -f init.sql")
     return {
-        "Intro": "A shopping-cart application."
+        "Message": "Tables initialized - users, items and carts"
     }
 
 

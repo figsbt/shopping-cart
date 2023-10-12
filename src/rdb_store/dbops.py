@@ -1,4 +1,3 @@
-import os
 from settings import DATABASE_URL
 from sqlalchemy import create_engine
 from sqlalchemy.sql import text
@@ -35,5 +34,4 @@ def get_db():
 
 
 def reset_db_on_startup():
-	with engine.connect() as con:
-		os.system("PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -U postgres -q -f init.sql")
+	pass
