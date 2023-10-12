@@ -76,5 +76,5 @@ Testing APIs both via swagger and curl right now
 
     - As the web-app itself is containarized, it can be deployed on kubernetes to scale on demand.
 
-## Couldn't add these
+## Couldn't add these because of the lack of time
 * More tests and CICD via github actions
