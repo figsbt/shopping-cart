@@ -3,5 +3,8 @@ pyjwt
 bcrypt
 sqlalchemy
 psycopg2
+pytest
+pytest-asyncio
+pytest-mock
 pydantic[email]
 uvicorn[standard]
