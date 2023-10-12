@@ -1,3 +1,4 @@
+import os
 from settings import DATABASE_URL
 from sqlalchemy import create_engine
 from sqlalchemy.sql import text
@@ -33,19 +34,6 @@ def get_db():
 		db.close()		
 
 
-def reset_db_on_startup(table_names):
+def reset_db_on_startup():
 	with engine.connect() as con:
-		"""
-            for table_name in table_names:
-                con.execute(text(f"DROP TABLE IF EXISTS {table_name};"))
-            con.execute(
-                text("CREATE TABLE users (id SERIAL PRIMARY KEY, email_id VARCHAR(255) NOT NULL, pwd_hash VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, is_active BOOLEAN DEFAULT TRUE, is_admin BOOLEAN DEFAULT FALSE, UNIQUE(email_id));")
-            )
-            con.execute(
-                text("CREATE TABLE items (id SERIAL PRIMARY KEY, item_name VARCHAR(255) NOT NULL, item_details VARCHAR(255) NOT NULL, stock INT NOT NULL, cost FLOAT);")
-            )
-			con.execute(
-                text("CREATE TABLE carts (id SERIAL PRIMARY KEY, user_ref INT NOT NULL, items_ref JSONB, UNIQUE(user_ref));")
-            )
-		"""
-		pass
+		os.system("PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -U postgres -q -f init.sql")

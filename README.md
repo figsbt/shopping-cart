@@ -13,6 +13,7 @@
 ## How to setup and test the APIs
 * Working directory    : `src`
 * ENV variable         : `export POSTGRES_HOST=postgresdb POSTGRES_PORT=5432 POSTGRES_DB=postgres POSTGRES_USER=postgres POSTGRES_PASSWORD=sc1er SECRET_KEY=asjdhasjd`
+* Build docker compose : `docker compose build`
 * Start docker compose : `docker compose up -d`
 * Stop docker compose  :
     - `docker compose down -v`  # to remove volumes too
@@ -37,7 +38,7 @@ Testing APIs both via swagger and curl right now
     
     5. Items AddItem API    | `curl --location 'http://127.0.0.1:8000/shop/add_item' --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIn0.N3LMRxhKqsR4SfttRFnHoTZjGXGDUKbtD8kTKKAQp9s' --header 'Content-Type: application/json' --data '{ "item_name": "bottle", "item_details": "A green bottle", "stock": 3, "cost": 12.56 }'`
         - Response: Only admin can add items
-        
+
     6 Items ListItems API  | `curl --location 'http://127.0.0.1:8000/shop/item_list' --header 'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIn0.8d5Xn3qxJEahbkZCnV4Ww0IWe5bLAUkKWCYDkigD0ao'`
         - Response: List of items for any user who is active
 ```

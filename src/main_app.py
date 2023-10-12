@@ -8,7 +8,7 @@ app = FastAPI()
 
 @app.on_event("startup")
 async def startup_event():
-    pass
+    reset_db_on_startup()
 
 @app.get("/application-info")
 async def application_intro():
