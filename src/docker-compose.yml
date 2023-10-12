@@ -13,7 +13,7 @@ services:
   
   fastapi-app:
     build: .
-    command: bash -c 'uvicorn main_app:app --host 0.0.0.0'
+    command: bash -c 'sleep 5 && uvicorn main_app:app --host 0.0.0.0 --workers $APP_WORKERS'
     volumes:
       - .:/src
     ports:
@@ -25,8 +25,10 @@ services:
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       - SECRET_KEY=$SECRET_KEY
+      - APP_WORKERS=$APP_WORKERS
     depends_on:
       - postgresdb
+    restart: unless-stopped
 
 volumes:
   postgres_data:
