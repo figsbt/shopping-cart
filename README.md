@@ -67,8 +67,14 @@ Testing APIs both via swagger and curl right now
 ---
 
 
-## What's pending
-* Introduce stock and cost constraints within items table; Index user_ref field in carts; modify_cart as transaction; only list items with non-zero stock
-* Adding tests
-* If possible, CICD via github actions
-* Pending documentation: HowTo of everything including how to secure and scale this application
+## How to scale this. A short note.
+
+    - Any RDBMS(PostgresSQL here) should be a muti-node distributed setup. 
+        - Data sharded across the nodes for better performance
+        - Each primary shard with a replica for high availability
+        - Something like this (https://vitess.io/) to scale MySQL
+
+    - As the web-app itself is containarized, it can be deployed on kubernetes to scale on demand.
+
+## Couldn't add these
+* More tests and CICD via github actions
