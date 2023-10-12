@@ -18,7 +18,8 @@ def create_account(
 ):
 	payload.pwd_hash = User.hash_pwd(payload.pwd_hash)
 	try:
-		return create_user(session, user=payload)
+		_user = create_user(session, user=payload)
+		return _user
 	except Exception as ex:
 		raise HTTPException(status_code=500, detail=str(ex))
 	
@@ -52,7 +53,7 @@ def suspend_user(
 		payload: SuspendUserSchema = Body(),
 		session: Session = Depends(get_db)
 	):
-	_admin = check_permissions(req=req, session=session)
+	_admin, uid = check_permissions(req=req, session=session)
 	if _admin:
 		db_suspend_user(session=session, email=payload.suspend_email)
 		return {"Message": f"Suspended <{payload.suspend_email}> !"}

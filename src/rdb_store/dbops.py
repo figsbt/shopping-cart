@@ -12,7 +12,9 @@ from sqlalchemy import (
     Boolean,
     LargeBinary,
     UniqueConstraint,
-    PrimaryKeyConstraint
+    PrimaryKeyConstraint,
+	ARRAY,
+	JSON
 )
 from sqlalchemy.orm import relationship, Session, sessionmaker, declarative_base
 
@@ -43,4 +45,8 @@ def reset_db_on_startup(table_names):
             con.execute(
                 text("CREATE TABLE items (id SERIAL PRIMARY KEY, item_name VARCHAR(255) NOT NULL, item_details VARCHAR(255) NOT NULL, stock INT NOT NULL, cost FLOAT);")
             )
+			con.execute(
+                text("CREATE TABLE carts (id SERIAL PRIMARY KEY, user_ref INT NOT NULL, items_ref JSONB, UNIQUE(user_ref));")
+            )
 		"""
+		pass

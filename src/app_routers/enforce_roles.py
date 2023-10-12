@@ -23,4 +23,4 @@ def check_permissions(req: Request, session: Session, admin_check: bool = True):
 		raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not active!")
 	if (admin_check) and (not user.is_admin):
 		raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not admin!")
-	return True
+	return True, user.id

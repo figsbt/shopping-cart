@@ -86,7 +86,7 @@ Testing APIs both via swagger and curl right now:
 
 
 ## What's pending
-* Introduce stock and cost constraints within items table
+* Introduce stock and cost constraints within items table; Index user_ref field in carts; modify_cart as transaction; only list items with non-zero stock
 * Cart APIs for both adding items(if stock) and removing them from cart
 * Containarizing the entire setup via docker-compose
 * Adding tests

@@ -1,6 +1,6 @@
 from typing import Optional
 from pydantic import BaseModel, Field
-from rdb_store.dbops import Base, Column, String, Integer, Float, PrimaryKeyConstraint
+from rdb_store.dbops import Base, Column, String, Integer, Float, PrimaryKeyConstraint, UniqueConstraint, JSON
 
 
 class Item(Base):
@@ -13,7 +13,7 @@ class Item(Base):
     stock = Column(Integer, nullable=False)
     cost = Column(Float, nullable=False)
 
-    PrimaryKeyConstraint("id", name="pk_user_id")
+    PrimaryKeyConstraint("id", name="pk_item_id")
 
 
 class ItemBaseSchema(BaseModel):
@@ -34,32 +34,29 @@ class ItemSchema(ItemBaseSchema):
         orm_mode = True
 
 
-# class Cart(Base):
-#     __tablename__ = 'carts'
+class Cart(Base):
+    __tablename__ = 'carts'
 
-#     id = Column(Integer, nullable=False, primary_key=True, index=True)
-#     created_at = Column(TIMESTAMP(timezone=True),
-#                         nullable=False, server_default=text("now()"))
-#     updated_at = Column(TIMESTAMP(timezone=True),
-#                         nullable=False, server_default=text("now()"))
+    id = Column(Integer, nullable=False, primary_key=True)
+    user_ref = Column(Integer, nullable=False)
+    items_ref = Column(JSON, nullable=True)
 
-#     products = relationship("Product", back_populates="owner")
+    PrimaryKeyConstraint("id", name="pk_cart_id")
+    UniqueConstraint("user_ref", name="uq_user_ref")
 
 
-# class Product(Base):
-#     __tablename__ = 'products'
+class CartBaseSchema(BaseModel):
+    user_ref: int
+    items_ref: dict
 
-#     id = Column(Integer, nullable=False, primary_key=True, index=True)
-#     title = Column(String, nullable=False)
-#     price = Column(Float, nullable=False)
-#     description = Column(String, nullable=False)
-#     category = Column(String, nullable=False)
-#     image = Column(String, nullable=True)
-#     rating = Column(String, nullable=True)
-#     created_at = Column(TIMESTAMP(timezone=True),
-#                         nullable=False, server_default=text("now()"))
-#     updated_at = Column(TIMESTAMP(timezone=True),
-#                         nullable=False, server_default=text("now()"))
-#     owner_id = Column(Integer, ForeignKey("carts.id"))
 
-#     owner = relationship("Cart", back_populates="products")
+
+class CartSchema(CartBaseSchema):
+    id: int
+
+    class Config:
+        orm_mode = True
+
+
+class ItemToCartSchema(BaseModel):
+    item_id: int
