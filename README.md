@@ -33,7 +33,7 @@ Testing APIs both via swagger and curl right now
 
     2. Users Create Account
         - Request: curl -X 'POST'  'http://127.0.0.1:8000/users/create_account' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{"email_id": "user2@example.com", "name": "user2 name", "password": "sdfhsdfs", "is_admin": false}'
-        - Response: { "email_id": "user5@example.com", "name": "string5", "id": 6, "is_admin": false }
+        - Response: { "email_id": "user2@example.com", "name": "user2 name", "id": 6, "is_admin": false }
 
     3. Users Login API
         - Reqiest: curl -X 'POST' 'http://127.0.0.1:8000/users/login' -H 'accept: application/json' -H 'Content-Type: application/json' -d '{ "email": "user2@example.com", "password": "sdfhsdfs" }'
